@@ -106,10 +106,18 @@ public class TextBoxManagerNivel8 : MonoBehaviour
         {
             contenidoCas1 = cas1.transform.GetChild(0).name + cas2.transform.GetChild(0).name + cas3.transform.GetChild(0).name + cas4.transform.GetChild(0).name;
         }
+        else
+        {
+            contenidoCas1 = "";
+        }
 
         if (!cas5.transform.childCount.Equals(0) && !cas6.transform.childCount.Equals(0) && !cas7.transform.childCount.Equals(0) && !cas8.transform.childCount.Equals(0))
         {
             contenidoCas2 = cas5.transform.GetChild(0).name + cas6.transform.GetChild(0).name + cas7.transform.GetChild(0).name + cas8.transform.GetChild(0).name;
+        }
+        else
+        {
+            contenidoCas2 = "";
         }
 
         if (!cas9.transform.childCount.Equals(0) && !cas10.transform.childCount.Equals(0) && !cas11.transform.childCount.Equals(0) &&
@@ -119,6 +127,10 @@ public class TextBoxManagerNivel8 : MonoBehaviour
             contenidoCas3 = cas9.transform.GetChild(0).name + cas10.transform.GetChild(0).name + cas11.transform.GetChild(0).name +
                 cas12.transform.GetChild(0).name + cas13.transform.GetChild(0).name + cas14.transform.GetChild(0).name +
                 cas15.transform.GetChild(0).name + cas16.transform.GetChild(0).name + cas17.transform.GetChild(0).name;
+        }
+        else
+        {
+            contenidoCas3 = "";
         }
 
         if (contenidoCas1.Equals("8X+4") || contenidoCas1.Equals("4+8X"))
@@ -174,23 +186,18 @@ public class TextBoxManagerNivel8 : MonoBehaviour
             scorePanel.SetActive(true);
             totalTime = Time.time - startTime;
             score.text = ("¡Has acertado!\n\nTiempo total: " + String.Format("{0:0.00}", totalTime) + "\n\nFallos totales: " + totalFails);
-            PlayerPrefs.SetInt("totalFails", PlayerPrefs.GetInt("totalFails") + totalFails);
             PlayerPrefs.SetInt("failsLevel8", totalFails);
-            PlayerPrefs.SetFloat("totalTime", PlayerPrefs.GetFloat("totalTime") + totalTime);
             PlayerPrefs.SetFloat("timeLevel8", totalTime);
             switch (totalFails)
             {
                 case 0:
                     star3.SetActive(true);
-                    PlayerPrefs.SetInt("totalStars", PlayerPrefs.GetInt("totalStars") + 3);
                     break;
                 case 1:
                     star2.SetActive(true);
-                    PlayerPrefs.SetInt("totalStars", PlayerPrefs.GetInt("totalStars") + 2);
                     break;
                 case 2:
                     star1.SetActive(true);
-                    PlayerPrefs.SetInt("totalStars", PlayerPrefs.GetInt("totalStars") + 1);
                     break;
             }
             colaSprite.SetActive(true);
@@ -225,6 +232,20 @@ public class TextBoxManagerNivel8 : MonoBehaviour
 
     public void nextLevel(string name)
     {
+        PlayerPrefs.SetInt("totalFails", PlayerPrefs.GetInt("totalFails") + totalFails);
+        PlayerPrefs.SetFloat("totalTime", PlayerPrefs.GetFloat("totalTime") + totalTime);
+        switch (totalFails)
+        {
+            case 0:
+                PlayerPrefs.SetInt("totalStars", PlayerPrefs.GetInt("totalStars") + 3);
+                break;
+            case 1:
+                PlayerPrefs.SetInt("totalStars", PlayerPrefs.GetInt("totalStars") + 2);
+                break;
+            case 2:
+                PlayerPrefs.SetInt("totalStars", PlayerPrefs.GetInt("totalStars") + 1);
+                break;
+        }
         SceneManager.LoadScene(name);
     }
 

@@ -124,10 +124,18 @@ public class TextBoxManagerNivel7 : MonoBehaviour
         {
             contenidoCas1 = cas1.transform.GetChild(0).name + cas2.transform.GetChild(0).name + cas3.transform.GetChild(0).name;
         }
+        else
+        {
+            contenidoCas1 = "";
+        }
 
         if (!cas4.transform.childCount.Equals(0) && !cas5.transform.childCount.Equals(0) && !cas6.transform.childCount.Equals(0))
         {
             contenidoCas2 = cas4.transform.GetChild(0).name + cas5.transform.GetChild(0).name + cas6.transform.GetChild(0).name;
+        }
+        else
+        {
+            contenidoCas2 = "";
         }
 
         if (contenidoCas1.Equals("40-30"))
@@ -177,23 +185,18 @@ public class TextBoxManagerNivel7 : MonoBehaviour
             scorePanel.SetActive(true);
             totalTime = Time.time - startTime;
             score.text = ("¡Has acertado!\n\nTiempo total: " + String.Format("{0:0.00}", totalTime) + "\n\nFallos totales: " + totalFails);
-            PlayerPrefs.SetInt("totalFails", PlayerPrefs.GetInt("totalFails") + totalFails);
             PlayerPrefs.SetInt("failsLevel7", totalFails);
-            PlayerPrefs.SetFloat("totalTime", PlayerPrefs.GetFloat("totalTime") + totalTime);
             PlayerPrefs.SetFloat("timeLevel7", totalTime);
             switch (totalFails)
             {
                 case 0:
                     star3.SetActive(true);
-                    PlayerPrefs.SetInt("totalStars", PlayerPrefs.GetInt("totalStars") + 3);
                     break;
                 case 1:
                     star2.SetActive(true);
-                    PlayerPrefs.SetInt("totalStars", PlayerPrefs.GetInt("totalStars") + 2);
                     break;
                 case 2:
                     star1.SetActive(true);
-                    PlayerPrefs.SetInt("totalStars", PlayerPrefs.GetInt("totalStars") + 1);
                     break;
             }
             moneyPileSprite.SetActive(true);
@@ -229,6 +232,20 @@ public class TextBoxManagerNivel7 : MonoBehaviour
 
     public void nextLevel(string name)
     {
+        PlayerPrefs.SetInt("totalFails", PlayerPrefs.GetInt("totalFails") + totalFails);
+        PlayerPrefs.SetFloat("totalTime", PlayerPrefs.GetFloat("totalTime") + totalTime);
+        switch (totalFails)
+        {
+            case 0:
+                PlayerPrefs.SetInt("totalStars", PlayerPrefs.GetInt("totalStars") + 3);
+                break;
+            case 1:
+                PlayerPrefs.SetInt("totalStars", PlayerPrefs.GetInt("totalStars") + 2);
+                break;
+            case 2:
+                PlayerPrefs.SetInt("totalStars", PlayerPrefs.GetInt("totalStars") + 1);
+                break;
+        }
         SceneManager.LoadScene(name);
     }
 

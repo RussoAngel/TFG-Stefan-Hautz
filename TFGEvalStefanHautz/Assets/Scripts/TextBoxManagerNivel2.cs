@@ -119,23 +119,18 @@ public class TextBoxManagerNivel2 : MonoBehaviour {
 			scorePanel.SetActive(true);
 			totalTime = Time.time - startTime;
 			score.text= ("¡Has acertado!\n\nTiempo total: " + String.Format("{0:0.00}", totalTime) + "\n\nFallos totales: " + totalFails);
-            PlayerPrefs.SetInt("totalFails", PlayerPrefs.GetInt("totalFails") + totalFails);
             PlayerPrefs.SetInt("failsLevel2", totalFails);
-            PlayerPrefs.SetFloat("totalTime", PlayerPrefs.GetFloat("totalTime") + totalTime);
             PlayerPrefs.SetFloat("timeLevel2", totalTime);
             switch (totalFails)
             {
                 case 0:
                     star3.SetActive(true);
-                    PlayerPrefs.SetInt("totalStars", PlayerPrefs.GetInt("totalStars") + 3);
                     break;
                 case 1:
                     star2.SetActive(true);
-                    PlayerPrefs.SetInt("totalStars", PlayerPrefs.GetInt("totalStars") + 2);
                     break;
                 case 2:
                     star1.SetActive(true);
-                    PlayerPrefs.SetInt("totalStars", PlayerPrefs.GetInt("totalStars") + 1);
                     break;
             }
             candyBagsSprite.SetActive(true);
@@ -175,7 +170,21 @@ public class TextBoxManagerNivel2 : MonoBehaviour {
 
 	public void nextLevel(string name)
 	{
-		SceneManager.LoadScene(name);
+        switch (totalFails)
+        {
+            case 0:
+                PlayerPrefs.SetInt("totalStars", PlayerPrefs.GetInt("totalStars") + 3);
+                break;
+            case 1:
+                PlayerPrefs.SetInt("totalStars", PlayerPrefs.GetInt("totalStars") + 2);
+                break;
+            case 2:
+                PlayerPrefs.SetInt("totalStars", PlayerPrefs.GetInt("totalStars") + 1);
+                break;
+        }
+        PlayerPrefs.SetInt("totalFails", PlayerPrefs.GetInt("totalFails") + totalFails);
+        PlayerPrefs.SetFloat("totalTime", PlayerPrefs.GetFloat("totalTime") + totalTime);
+        SceneManager.LoadScene(name);
 	}
 
 	void textManager()

@@ -91,6 +91,9 @@ public class TextBoxManagerNivel3 : MonoBehaviour {
             contenidoCas1 = cas1.transform.GetChild(0).name + cas2.transform.GetChild(0).name + cas3.transform.GetChild(0).name +
                 cas4.transform.GetChild(0).name + cas5.transform.GetChild(0).name + cas6.transform.GetChild(0).name;
         }
+        else {
+            contenidoCas1 = "";
+        }
 
         if (contenidoCas1.Equals("80=21X+17") || contenidoCas1.Equals("80=17+21X") || contenidoCas1.Equals("21X+17=80") ||
             contenidoCas1.Equals("17+21X=80"))
@@ -102,12 +105,15 @@ public class TextBoxManagerNivel3 : MonoBehaviour {
         }
 
         if (!cas7.transform.childCount.Equals(0) && !cas8.transform.childCount.Equals(0) && !cas9.transform.childCount.Equals(0) &&
-            !cas10.transform.childCount.Equals(0) && !cas11.transform.childCount.Equals(0) && !cas12.transform.childCount.Equals(0) && 
+            !cas10.transform.childCount.Equals(0) && !cas11.transform.childCount.Equals(0) && !cas12.transform.childCount.Equals(0) &&
             !cas13.transform.childCount.Equals(0)
             )
         {
             contenidoCas2 = cas7.transform.GetChild(0).name + cas8.transform.GetChild(0).name + cas9.transform.GetChild(0).name +
                 cas10.transform.GetChild(0).name + cas11.transform.GetChild(0).name + cas12.transform.GetChild(0).name + cas13.transform.GetChild(0).name;
+        }
+        else {
+            contenidoCas2 = "";
         }
 
         if (contenidoCas2.Equals("80=21x3+17") || contenidoCas2.Equals("80=17+21x3") || contenidoCas2.Equals("21x3+17=80") ||
@@ -143,23 +149,18 @@ public class TextBoxManagerNivel3 : MonoBehaviour {
             scorePanel.SetActive(true);
             totalTime = Time.time - startTime;
             score.text = ("¡Has acertado!\n\nTiempo total: " + String.Format("{0:0.00}", totalTime) + "\n\nFallos totales: " + totalFails);
-            PlayerPrefs.SetInt("totalFails", PlayerPrefs.GetInt("totalFails") + totalFails);
             PlayerPrefs.SetInt("failsLevel3", totalFails);
-            PlayerPrefs.SetFloat("totalTime", PlayerPrefs.GetFloat("totalTime") + totalTime);
             PlayerPrefs.SetFloat("timeLevel3", totalTime);
             switch (totalFails)
             {
                 case 0:
                     star3.SetActive(true);
-                    PlayerPrefs.SetInt("totalStars", PlayerPrefs.GetInt("totalStars") + 3);
                     break;
                 case 1:
                     star2.SetActive(true);
-                    PlayerPrefs.SetInt("totalStars", PlayerPrefs.GetInt("totalStars") + 2);
                     break;
                 case 2:
                     star1.SetActive(true);
-                    PlayerPrefs.SetInt("totalStars", PlayerPrefs.GetInt("totalStars") + 1);
                     break;
             }
             yureQuestion.SetActive(false);
@@ -202,7 +203,21 @@ public class TextBoxManagerNivel3 : MonoBehaviour {
 
 	public void nextLevel(string name)
 	{
-		SceneManager.LoadScene(name);
+        switch (totalFails)
+        {
+            case 0:
+                PlayerPrefs.SetInt("totalStars", PlayerPrefs.GetInt("totalStars") + 3);
+                break;
+            case 1:
+                PlayerPrefs.SetInt("totalStars", PlayerPrefs.GetInt("totalStars") + 2);
+                break;
+            case 2:
+                PlayerPrefs.SetInt("totalStars", PlayerPrefs.GetInt("totalStars") + 1);
+                break;
+        }
+        PlayerPrefs.SetFloat("totalTime", PlayerPrefs.GetFloat("totalTime") + totalTime);
+        PlayerPrefs.SetInt("totalFails", PlayerPrefs.GetInt("totalFails") + totalFails);
+        SceneManager.LoadScene(name);
 	}
 
 	void textManager()

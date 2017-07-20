@@ -119,22 +119,17 @@ public class TextBoxManagerNivel1 : MonoBehaviour {
             scorePanel.SetActive(true);
             totalTime = Time.time - startTime;
             score.text= ("¡Has acertado!\n\nTiempo total: " + String.Format("{0:0.00}", totalTime) + "\n\nFallos totales: " + totalFails);
-            PlayerPrefs.SetInt("totalFails", totalFails);
             PlayerPrefs.SetInt("failsLevel1", totalFails);
-            PlayerPrefs.SetFloat("totalTime", totalTime);
             PlayerPrefs.SetFloat("timeLevel1", totalTime);
             switch (totalFails) {
                 case 0:
                     star3.SetActive(true);
-                    PlayerPrefs.SetInt("totalStars", PlayerPrefs.GetInt("totalStars") + 3);
                     break;
                 case 1:
                     star2.SetActive(true);
-                    PlayerPrefs.SetInt("totalStars", PlayerPrefs.GetInt("totalStars") + 2);
                     break;
                 case 2:
                     star1.SetActive(true);
-                    PlayerPrefs.SetInt("totalStars", PlayerPrefs.GetInt("totalStars") + 1);
                     break;
             }
             candyBagsSprite.SetActive(true);
@@ -156,6 +151,20 @@ public class TextBoxManagerNivel1 : MonoBehaviour {
 
     public void nextLevel(string name)
     {
+        switch (totalFails)
+        {
+            case 0:
+                PlayerPrefs.SetInt("totalStars", PlayerPrefs.GetInt("totalStars") + 3);
+                break;
+            case 1:
+                PlayerPrefs.SetInt("totalStars", PlayerPrefs.GetInt("totalStars") + 2);
+                break;
+            case 2:
+                PlayerPrefs.SetInt("totalStars", PlayerPrefs.GetInt("totalStars") + 1);
+                break;
+        }
+        PlayerPrefs.SetFloat("totalTime", totalTime);
+        PlayerPrefs.SetInt("totalFails", totalFails);
         SceneManager.LoadScene(name);
     }
 
