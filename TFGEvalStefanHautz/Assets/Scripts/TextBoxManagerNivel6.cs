@@ -275,12 +275,18 @@ public class TextBoxManagerNivel6 : MonoBehaviour
             {
                 case 0:
                     star3.SetActive(true);
+                    PlayerPrefs.SetInt("starsLevel6", 3);
                     break;
                 case 1:
                     star2.SetActive(true);
+                    PlayerPrefs.SetInt("starsLevel6", 2);
                     break;
                 case 2:
                     star1.SetActive(true);
+                    PlayerPrefs.SetInt("starsLevel6", 1);
+                    break;
+                default:
+                    PlayerPrefs.SetInt("starsLevel6", 0);
                     break;
             }
             yureQuestion.SetActive(false);
@@ -311,20 +317,6 @@ public class TextBoxManagerNivel6 : MonoBehaviour
 
     public void nextLevel(string name)
     {
-        PlayerPrefs.SetInt("totalFails", PlayerPrefs.GetInt("totalFails") + totalFails);
-        PlayerPrefs.SetFloat("totalTime", PlayerPrefs.GetFloat("totalTime") + totalTime);
-        switch (totalFails)
-        {
-            case 0:
-                PlayerPrefs.SetInt("totalStars", PlayerPrefs.GetInt("totalStars") + 3);
-                break;
-            case 1:
-                PlayerPrefs.SetInt("totalStars", PlayerPrefs.GetInt("totalStars") + 2);
-                break;
-            case 2:
-                PlayerPrefs.SetInt("totalStars", PlayerPrefs.GetInt("totalStars") + 1);
-                break;
-        }
         SceneManager.LoadScene(name);
     }
 

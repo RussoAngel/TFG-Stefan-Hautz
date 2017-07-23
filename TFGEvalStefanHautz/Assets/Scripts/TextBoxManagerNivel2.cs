@@ -125,12 +125,18 @@ public class TextBoxManagerNivel2 : MonoBehaviour {
             {
                 case 0:
                     star3.SetActive(true);
+                    PlayerPrefs.SetInt("starsLevel2", 3);
                     break;
                 case 1:
                     star2.SetActive(true);
+                    PlayerPrefs.SetInt("starsLevel2", 2);
                     break;
                 case 2:
                     star1.SetActive(true);
+                    PlayerPrefs.SetInt("starsLevel2", 1);
+                    break;
+                default:
+                    PlayerPrefs.SetInt("starsLevel2", 0);
                     break;
             }
             candyBagsSprite.SetActive(true);
@@ -170,20 +176,6 @@ public class TextBoxManagerNivel2 : MonoBehaviour {
 
 	public void nextLevel(string name)
 	{
-        switch (totalFails)
-        {
-            case 0:
-                PlayerPrefs.SetInt("totalStars", PlayerPrefs.GetInt("totalStars") + 3);
-                break;
-            case 1:
-                PlayerPrefs.SetInt("totalStars", PlayerPrefs.GetInt("totalStars") + 2);
-                break;
-            case 2:
-                PlayerPrefs.SetInt("totalStars", PlayerPrefs.GetInt("totalStars") + 1);
-                break;
-        }
-        PlayerPrefs.SetInt("totalFails", PlayerPrefs.GetInt("totalFails") + totalFails);
-        PlayerPrefs.SetFloat("totalTime", PlayerPrefs.GetFloat("totalTime") + totalTime);
         SceneManager.LoadScene(name);
 	}
 
