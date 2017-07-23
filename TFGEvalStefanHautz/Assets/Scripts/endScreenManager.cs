@@ -20,8 +20,8 @@ public class endScreenManager : MonoBehaviour
             PlayerPrefs.GetFloat("timeLevel5") + PlayerPrefs.GetFloat("timeLevel6") + PlayerPrefs.GetFloat("timeLevel7") + PlayerPrefs.GetFloat("timeLevel8");
         totalFails = PlayerPrefs.GetInt("failsLevel1") + PlayerPrefs.GetInt("failsLevel2") + PlayerPrefs.GetInt("failsLevel3") + PlayerPrefs.GetInt("failsLevel4") +
             PlayerPrefs.GetInt("failsLevel5") + PlayerPrefs.GetInt("failsLevel6") + PlayerPrefs.GetInt("failsLevel7") + PlayerPrefs.GetInt("failsLevel8");
-        totalStars = PlayerPrefs.GetInt("startsLevel1") + PlayerPrefs.GetInt("startsLevel2") + PlayerPrefs.GetInt("startsLevel3") + PlayerPrefs.GetInt("startsLevel4") +
-            PlayerPrefs.GetInt("startsLevel5") + PlayerPrefs.GetInt("startsLevel6") + PlayerPrefs.GetInt("startsLevel7") + PlayerPrefs.GetInt("startsLevel8");
+        totalStars = PlayerPrefs.GetInt("starsLevel1") + PlayerPrefs.GetInt("starsLevel2") + PlayerPrefs.GetInt("starsLevel3") + PlayerPrefs.GetInt("starsLevel4") +
+            PlayerPrefs.GetInt("starsLevel5") + PlayerPrefs.GetInt("starsLevel6") + PlayerPrefs.GetInt("starsLevel7") + PlayerPrefs.GetInt("starsLevel8");
         scores.text = "Tiempo total: " + String.Format("{0:0.00}", totalTime) + "\t Fallos totales: " + totalFails;
         starNumber.text = totalStars.ToString();
         sendMail();
